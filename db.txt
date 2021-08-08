@@ -1,0 +1,9 @@
+sequelize model:create --name users --attributes name:string,email:string,address:string
+sequelize model:create --name products --attributes name:string,price:float,category_id:string,image:string
+sequelize model:create --name categories --attributes name:string
+sequelize model:create --name carts --attributes customer_id:string,product_id:string,order_id:string,quantity:integer,status:integer
+
+sequelize seed:generate --name products
+sequelize seed:generate --name categories
+sequelize seed:generate --name users
+
