@@ -16,7 +16,8 @@
     "morgan": "~1.9.1",
     "mysql2": "^2.3.0",
     "sequelize": "^6.6.5",
-    "slugify": "^1.6.0"
+    "slugify": "^1.6.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "faker": "^5.5.3",

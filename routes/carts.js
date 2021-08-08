@@ -1,5 +1,7 @@
 var express = require("express");
 var router = express.Router();
+const { v4: uuidv4 } = require("uuid");
+
 const model = require("../models/index");
 
 /* GET carts listing. */
@@ -24,6 +26,7 @@ router.post("/", async function (req, res, next) {
   try {
     const { customer_id, product_id, order_id, quantity, status } = req.body;
     const carts = await model.carts.create({
+      id: uuidv4(),
       customer_id,
       product_id,
       order_id,
