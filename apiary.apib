@@ -3,35 +3,39 @@ HOST: https://polls.apiblueprint.org/
 
 # toko-api
 
-Polls is a simple API allowing consumers to view polls and vote in them.
 
-## Questions Collection [/questions]
+## Products Collection [/products]
 
-### List All Questions [GET]
+### List All Products [GET]
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
+        {
+            "status": "OK",
+            "messages": "",
+            "data": [
+                {
+                    "id": "0af42b17-f6ed-40ec-8a95-8b0586188587",
+                    "name": "Ergonomic Cotton Soap",
+                    "price": 417,
+                    "category_id": "28c9668d-d17e-49bd-8d04-8c77050b6ee3",
+                    "image": "https://ik.imagekit.io/duogwqkwlvc/product-52a8bd82-f5a0-11eb-8ac3-fdb820fd4276_ygKV0bzWT.jpeg",
+                    "slug": "Ergonomic-Cotton-Soap",
+                    "createdAt": "2021-08-08T13:27:03.000Z",
+                    "updatedAt": "2021-08-08T13:27:03.000Z"
+                },
+                {
+                    "id": "4629bc78-8e5f-4bcf-a7b9-28a036ad40c4",
+                    "name": "Handmade Steel Chair",
+                    "price": 886,
+                    "category_id": "28c9668d-d17e-49bd-8d04-8c77050b6ee3",
+                    "image": "https://ik.imagekit.io/duogwqkwlvc/product-67aa89e0-f5a0-11eb-9329-6748f6021745_kOIDOSfLVY.jpeg",
+                    "slug": "Handmade-Steel-Chair",
+                    "createdAt": "2021-08-08T13:27:03.000Z",
+                    "updatedAt": "2021-08-08T13:27:03.000Z"
+                }
+            ]
+        }
 
 ### Create a New Question [POST]
 
