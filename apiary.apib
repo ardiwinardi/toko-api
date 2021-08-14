@@ -36,49 +36,89 @@ HOST: https://polls.apiblueprint.org/
                 }
             ]
         }
+        
 
-### Create a New Question [POST]
+## Product [/products/:slug]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Get Single Product by slug [GET]
+
++ Response 200 (application/json)
+
+        {
+        "status": "OK",
+        "messages": "",
+            "data": {
+                "id": "0af42b17-f6ed-40ec-8a95-8b0586188587",
+                "name": "Ergonomic Cotton Soap",
+                "price": 417,
+                "category_id": "28c9668d-d17e-49bd-8d04-8c77050b6ee3",
+                "image": "https://ik.imagekit.io/duogwqkwlvc/product-52a8bd82-f5a0-11eb-8ac3-fdb820fd4276_ygKV0bzWT.jpeg",
+                "slug": "Ergonomic-Cotton-Soap",
+                "createdAt": "2021-08-08T13:27:03.000Z",
+                "updatedAt": "2021-08-08T13:27:03.000Z"
+            }
+        }
+        
+        
+
+## Carts Collection [/carts]
+
+### List All Carts [GET]
+
++ Response 200 (application/json)
+
+        {
+            "status": "OK",
+            "messages": "",
+            "data": [
+                {
+                    "id": "02c31841-f497-4d47-9278-c71defc616cc",
+                    "customer_id": "",
+                    "product_id": "4629bc78-8e5f-4bcf-a7b9-28a036ad40c4",
+                    "order_id": "",
+                    "quantity": 1,
+                    "status": 0,
+                    "createdAt": "2021-08-08T14:34:28.000Z",
+                    "updatedAt": "2021-08-08T14:34:28.000Z"
+                },
+                {
+                    "id": "0961d688-d396-4f02-b4f5-6453e154b13e",
+                    "customer_id": "",
+                    "product_id": "4629bc78-8e5f-4bcf-a7b9-28a036ad40c4",
+                    "order_id": "",
+                    "quantity": 1,
+                    "status": 0,
+                    "createdAt": "2021-08-08T14:39:59.000Z",
+                    "updatedAt": "2021-08-08T14:39:59.000Z"
+                },
+            ]
+        }
+        
+
+### Add to Cart [POST]
+
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "product_id": "02c31841-f497-4d47-9278-c71defc616cc",
+            "quantity": 1
         }
 
 + Response 201 (application/json)
 
-    + Headers
-
-            Location: /questions/2
-
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "status": "OK",
+                "messages": "Keranjang berhasil ditambahkan",
+                "data": {
+                    "id": "88a6fb4f-86fb-4c0a-b717-cc777baa3f3f",
+                    "customer_id": "1234",
+                    "product_id": 123,
+                    "quantity": 1,
+                    "status": 0,
+                    "updatedAt": "2021-08-14T07:37:22.396Z",
+                    "createdAt": "2021-08-14T07:37:22.396Z"
+                }
             }
