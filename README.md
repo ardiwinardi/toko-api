@@ -19,3 +19,9 @@ Contoh REST API dengan menggunakan Nodejs, Express, & Sequelize
     Jika ingin menjalankan seed untuk file tertentu maka lakukan peirntah ini : 
     
     **npx sequelize db:seed --seed {path_file}**
+3. Jalankan server dengan perintah berikut : 
+
+    **npm run dev**
+    
+4. Untuk informasi userlogin dapat dilihat pada file **seeders/20210808074647-users.js**
+5. Selamat mencoba
