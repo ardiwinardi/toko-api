@@ -1,13 +1,12 @@
 var express = require("express");
 var router = express.Router();
 const model = require("../models/index");
-const authConfig = require("../config/auth");
 
 router.put("/", update);
 
 async function update(req, res, next) {
   try {
-    const { name, email, address, password } = req.body;
+    const { name, email, address } = req.body;
 
     const users = await model.users.update(
       {
