@@ -34,7 +34,7 @@ HOST: https://tokoapi.docs.apiary.io/
                 "messages": "Password tidak valid"
             }
 ## User [/auth/me]
-### Current User [POST]
+### Get Current User [GET]
 + Request (application/json)
     + Headers
 
@@ -50,6 +50,26 @@ HOST: https://tokoapi.docs.apiary.io/
                     "name": "Asep Ardi",
                     "address": "Bandung, Indonesia"
                 }
+            }
+## User [/users]
+### Edit User [PUT]
++ Request (application/json)
+    + Body
+
+            {
+                "name": "Asep Ardi",
+                "email": "user@mail.com",
+                "address": "Bandung"
+            }
+    + Headers
+
+            Authorization: token
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "OK",
+                "messages": "User berhasil diupdate"
             }
 + Response 400 (application/json)
     + Body
@@ -196,28 +216,7 @@ HOST: https://tokoapi.docs.apiary.io/
                 }
             }
 ## Single Cart [/carts/:id]
-### Cart By Id [GET]
-+ Request
-    + Headers
-
-            Authorization: token
-+ Response 200 (application/json)
-
-        {
-            "status": "OK",
-            "messages": "",
-            "data": {
-                "id": "02c31841-f497-4d47-9278-c71defc616cc",
-                "customer_id": "",
-                "product_id": "4629bc78-8e5f-4bcf-a7b9-28a036ad40c4",
-                "order_id": "",
-                "quantity": 1,
-                "status": 0,
-                "createdAt": "2021-08-08T14:34:28.000Z",
-                "updatedAt": "2021-08-08T14:34:28.000Z"
-            }
-        }
-### Edit Cart Quantity [PUT]
+### Edit Cart [PUT]
 + Request (application/json)
     + Body
     
