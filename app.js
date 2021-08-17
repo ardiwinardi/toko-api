@@ -1,49 +1,33 @@
-var createError = require("http-errors");
-var express = require("express");
-var cors = require("cors");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const express = require("express");
+const cors = require("cors");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var productsRouter = require("./routes/products");
-var cartsRouter = require("./routes/carts");
-var categoriesRouter = require("./routes/categories");
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
+const productsRouter = require("./routes/products");
+const categoriesRouter = require("./routes/categories");
+const cartsRouter = require("./routes/carts");
+const ordersRouter = require("./routes/orders");
+const authRouter = require("./routes/auth");
 
-var app = express();
+const authMiddleware = require("./middleware/auth");
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+const app = express();
 
-app.use(logger("dev"));
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/products", productsRouter);
-app.use("/carts", cartsRouter);
 app.use("/categories", categoriesRouter);
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+app.use("/users", [authMiddleware.verifyToken], usersRouter);
+app.use("/carts", [authMiddleware.verifyToken], cartsRouter);
+app.use("/orders", [authMiddleware.verifyToken], ordersRouter);
+app.use("/auth", authRouter);
+
+// start server
+const port = 3200;
+app.listen(port, function () {
+  console.log("[toko-api] info: api server listening on :::" + port);
 });
-
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
-});
-
-module.exports = app;

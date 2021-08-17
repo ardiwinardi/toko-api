@@ -2,8 +2,12 @@ var express = require("express");
 var router = express.Router();
 const model = require("../models/index");
 
-/* GET categories listing. */
-router.get("/", async function (req, res, next) {
+router.get("/", getAll);
+router.post("/", add);
+router.patch("/:id", update);
+router.delete("/:id", remove);
+
+async function getAll(req, res, next) {
   try {
     const categories = await model.categories.findAll({});
     res.json({
@@ -12,15 +16,14 @@ router.get("/", async function (req, res, next) {
       data: categories,
     });
   } catch (err) {
-    res.json({
+    res.status(400).json({
       status: "ERROR",
       messages: err.message,
-      data: {},
     });
   }
-});
+}
 
-router.post("/", async function (req, res, next) {
+async function add(req, res, next) {
   try {
     const { name } = req.body;
     const categories = await model.categories.create({
@@ -38,12 +41,11 @@ router.post("/", async function (req, res, next) {
     res.status(400).json({
       status: "ERROR",
       messages: err.message,
-      data: {},
     });
   }
-});
+}
 
-router.patch("/:id", async function (req, res, next) {
+async function update(req, res, next) {
   try {
     const categoryId = req.params.id;
     const { name } = req.body;
@@ -68,12 +70,11 @@ router.patch("/:id", async function (req, res, next) {
     res.status(400).json({
       status: "ERROR",
       messages: err.message,
-      data: {},
     });
   }
-});
+}
 
-router.delete("/:id", async function (req, res, next) {
+async function remove(req, res, next) {
   try {
     const categoryId = req.params.id;
     const categories = await model.categories.destroy({
@@ -92,9 +93,8 @@ router.delete("/:id", async function (req, res, next) {
     res.status(400).json({
       status: "ERROR",
       messages: err.message,
-      data: {},
     });
   }
-});
+}
 
 module.exports = router;

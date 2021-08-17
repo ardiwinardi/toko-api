@@ -1,10 +1,12 @@
 "use strict";
 const faker = require("faker");
-
+const bcrypt = require("bcryptjs");
+const authConfig = require("../config/auth");
 const user = {
   id: faker.datatype.uuid(),
   name: "Pelatihan ReactJs",
-  email: "pelatihan@reactjs.com",
+  email: "user@reactjs.com",
+  password: bcrypt.hashSync("rahasia", authConfig.salt),
   address: "Bandung, Indonesia",
   createdAt: new Date(),
   updatedAt: new Date(),
