@@ -1,13 +1,65 @@
 FORMAT: 1A
-HOST: https://polls.apiblueprint.org/
+HOST: https://tokoapi.docs.apiary.io/
+# REST API - TOKO
+## Authorization [/auth/signin]
+### Sign In [POST]
++ Request (application/json)
+    + Headers
 
-# toko-api
+            Authorization: token
+    + Body
 
+            {
+                "email": "user@mail.com",
+                "password": "secret"
+            }
++ Response 200 (application/json)
+    + Body
 
+            {
+                "status": "OK",
+                "messages": "Login Berhasil",
+                "data": {
+                    "email": "user@mail.com",
+                    "name": "Asep Ardi",
+                    "address": "Bandung, Indonesia",
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU1ZGY0NTA1LWQ2NWEtNDFhMS05M2E4LWM5ZGJlMjQ0OTFlNSIsImlhdCI6MTYyOTE2Mjk0MiwiZXhwIjoxNjI5MjQ5MzQyfQ.JCHqkzCns9HQMY8w1VQfkkxPJg56HIe_kj1b95WKyhc"
+                }
+            }
++ Response 400 (application/json)
+    + Body
+
+            {
+                "status": "ERROR",
+                "messages": "Password tidak valid"
+            }
+## User [/auth/me]
+### Current User [POST]
++ Request (application/json)
+    + Headers
+
+            Authorization: token
++ Response 200 (application/json)
+    + Body
+
+            {
+                "status": "OK",
+                "messages": "User terdaftar",
+                "data": {
+                    "email": "user@mail.com",
+                    "name": "Asep Ardi",
+                    "address": "Bandung, Indonesia"
+                }
+            }
++ Response 400 (application/json)
+    + Body
+
+            {
+                "status": "ERROR",
+                "messages": "User tidak terdaftar"
+            }
 ## Products Collection [/products]
-
-### List All Products [GET]
-
+### List All [GET]
 + Response 200 (application/json)
 
         {
@@ -36,12 +88,8 @@ HOST: https://polls.apiblueprint.org/
                 }
             ]
         }
-        
-
-## Product [/products/:slug]
-
-### Get Single Product by slug [GET]
-
+## Single Product [/products/:slug]
+### Product by slug [GET]
 + Response 200 (application/json)
 
         {
@@ -58,13 +106,40 @@ HOST: https://polls.apiblueprint.org/
                 "updatedAt": "2021-08-08T13:27:03.000Z"
             }
         }
-        
-        
+## Categories Collection [/categories]
+### List All [GET]
++ Response 200 (application/json)
 
+        {
+            "status": "OK",
+            "messages": "",
+            "data": [
+                {
+                    "id": "0c8baa12-fd67-4919-93ed-5c81db4b956b",
+                    "name": "hijau",
+                    "createdAt": "2021-08-08T13:27:03.000Z",
+                    "updatedAt": "2021-08-08T13:27:03.000Z"
+                },
+                {
+                    "id": "28c9668d-d17e-49bd-8d04-8c77050b6ee3",
+                    "name": "kuning",
+                    "createdAt": "2021-08-08T13:27:03.000Z",
+                    "updatedAt": "2021-08-08T13:27:03.000Z"
+                },
+                {
+                    "id": "d9f3d190-869e-44e9-99c6-bc525bf84334",
+                    "name": "biru",
+                    "createdAt": "2021-08-08T13:27:03.000Z",
+                    "updatedAt": "2021-08-08T13:27:03.000Z"
+                }
+            ]
+        }
 ## Carts Collection [/carts]
-
-### List All Carts [GET]
-
+### List All [GET]
++ Request
+    + Headers
+    
+            Authorization: token
 + Response 200 (application/json)
 
         {
@@ -93,20 +168,18 @@ HOST: https://polls.apiblueprint.org/
                 },
             ]
         }
-        
-
 ### Add to Cart [POST]
-
-
 + Request (application/json)
+    + Body
+    
+            {
+                "product_id": "02c31841-f497-4d47-9278-c71defc616cc",
+                "quantity": 1
+            }
+    + Headers
 
-        {
-            "product_id": "02c31841-f497-4d47-9278-c71defc616cc",
-            "quantity": 1
-        }
-
+            Authorization: token
 + Response 201 (application/json)
-
     + Body
 
             {
@@ -121,4 +194,102 @@ HOST: https://polls.apiblueprint.org/
                     "updatedAt": "2021-08-14T07:37:22.396Z",
                     "createdAt": "2021-08-14T07:37:22.396Z"
                 }
+            }
+## Single Cart [/carts/:id]
+### Cart By Id [GET]
++ Request
+    + Headers
+
+            Authorization: token
++ Response 200 (application/json)
+
+        {
+            "status": "OK",
+            "messages": "",
+            "data": {
+                "id": "02c31841-f497-4d47-9278-c71defc616cc",
+                "customer_id": "",
+                "product_id": "4629bc78-8e5f-4bcf-a7b9-28a036ad40c4",
+                "order_id": "",
+                "quantity": 1,
+                "status": 0,
+                "createdAt": "2021-08-08T14:34:28.000Z",
+                "updatedAt": "2021-08-08T14:34:28.000Z"
+            }
+        }
+### Edit Cart Quantity [PUT]
++ Request (application/json)
+    + Body
+    
+            {
+                "product_id": "02c31841-f497-4d47-9278-c71defc616cc",
+                "quantity": 1
+            }
+    + Headers
+    
+            Authorization: token
++ Response 201 (application/json)
+    + Body
+
+            {
+                "status": "OK",
+                "messages": "Keranjang berhasil diupdate"
+            }
+## Orders Collection [/orders]
+### List All [GET]
++ Request
+    + Headers
+    
+            Authorization: token
+            
++ Response 200 (application/json)
+
+        {
+            "status": "OK",
+            "messages": "",
+            "data": [
+                {
+                "id": "09f6e7fb-0709-429a-ba2b-c8c1fa5889b7",
+                "customer_id": "e5df4505-d65a-41a1-93a8-c9dbe24491e5",
+                "status": 0,
+                "createdAt": "2021-08-17T00:12:46.000Z",
+                "updatedAt": "2021-08-17T00:12:46.000Z",
+                "carts": [
+                    {
+                        "quantity": 3,
+                        "product": {
+                            "name": "Handmade Steel Chair",
+                            "price": 886,
+                            "image": "https://ik.imagekit.io/duogwqkwlvc/product-67aa89e0-f5a0-11eb-9329-6748f6021745_kOIDOSfLVY.jpeg"
+                        }
+                    },
+                    {
+                        "quantity": 1,
+                        "product": {
+                            "name": "Gorgeous Granite Cheese",
+                            "price": 920,
+                            "image": "https://ik.imagekit.io/duogwqkwlvc/product-67aa89e0-f5a0-11eb-9329-6748f6021745_kOIDOSfLVY.jpeg"
+                        }
+                    }
+                ]
+            ]
+        }
+### Checkout [POST]
++ Request
+    + Headers
+
+            Authorization: token
++ Response 201 (application/json)
+    + Body
+
+            {
+                "status": "OK",
+                "messages": "Checkout berhasil"
+            }
++ Response 400 (application/json)
+    + Body
+
+            {
+                "status": "ERROR",
+                "messages": "Keranjang masih kosong"
             }
