@@ -2,6 +2,9 @@
 
 Contoh REST API dengan menggunakan Nodejs, Express, & Sequelize
 
+API Doc : 
+https://tokoapi.docs.apiary.io
+
 
 ## Installasi
 1. Install library/dependencies dengan menjalankan perintah :
