@@ -20,6 +20,14 @@ async function getAll(req, res, next) {
       options.offset = parseInt(req.query.offset);
     }
 
+    options.include = [
+      {
+        model: model.categories,
+        as: "category",
+        attributes: ["name"],
+      },
+    ];
+
     const products = await model.products.findAll(options);
     res.json({
       status: "OK",
@@ -40,6 +48,13 @@ async function getBySlug(req, res, next) {
       whrere: {
         slug: req.params.slug,
       },
+      include: [
+        {
+          model: model.categories,
+          as: "category",
+          attributes: ["name"],
+        },
+      ],
     });
     res.json({
       status: "OK",

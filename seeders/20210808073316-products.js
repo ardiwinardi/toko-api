@@ -8,9 +8,11 @@ function getRandomInt(max) {
 }
 
 const images = [
-  "https://ik.imagekit.io/duogwqkwlvc/product-52a8bd82-f5a0-11eb-8ac3-fdb820fd4276_ygKV0bzWT.jpeg",
-  "https://ik.imagekit.io/duogwqkwlvc/product-67aa89e0-f5a0-11eb-9329-6748f6021745_kOIDOSfLVY.jpeg",
-  "https://ik.imagekit.io/duogwqkwlvc/product-5c6bc210-f5a0-11eb-9590-a15972dd1aa7_btTryR6voZ.jpeg",
+  "https://ik.imagekit.io/duogwqkwlvc/product-30dcc6c6-fb18-11eb-b192-9540dfd55f10_JBwXG45ucBs.webp",
+  "https://ik.imagekit.io/duogwqkwlvc/product-edc5a33c-fb15-11eb-9608-f1ad5425255a_DzFeTKcM7g.webp",
+  "https://ik.imagekit.io/duogwqkwlvc/product-7c19c77a-fb17-11eb-bb9a-fda9eaf422ef_zWbMufdcAiV.webp",
+  "https://ik.imagekit.io/duogwqkwlvc/product-2f91bb78-fb18-11eb-88e8-dd6da374616c_8N88gMfZd8.webp",
+  "https://ik.imagekit.io/duogwqkwlvc/product-7abb2a04-fb17-11eb-b68f-f31413319bf8_f5yQuG8u5B.webp",
 ];
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -21,7 +23,7 @@ module.exports = {
       return {
         id: faker.datatype.uuid(),
         name: name,
-        price: faker.commerce.price(),
+        price: 45000,
         image: images[getRandomInt(images.length)],
         slug: slugify(name),
         category_id: categories[getRandomInt(categories.length)].id,
