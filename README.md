@@ -31,3 +31,4 @@ https://tokoapi.docs.apiary.io
     
 5. Untuk informasi userlogin dapat dilihat pada file **seeders/20210808074647-users.js**
 6. Selamat mencoba
+7. API dapat diakses di http://localhost:3200
