@@ -13,7 +13,7 @@ async function getAll(req, res, next) {
       include: [
         {
           model: model.carts,
-          attributes: ["quantity"],
+          attributes: ["id", "quantity"],
           include: [
             {
               model: model.products,
