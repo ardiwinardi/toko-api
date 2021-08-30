@@ -7,6 +7,7 @@ const productsRouter = require("./routes/products");
 const categoriesRouter = require("./routes/categories");
 const cartsRouter = require("./routes/carts");
 const ordersRouter = require("./routes/orders");
+const notificationsRouter = require("./routes/notifications");
 const authRouter = require("./routes/auth");
 
 const authMiddleware = require("./middleware/auth");
@@ -23,6 +24,7 @@ app.use("/categories", categoriesRouter);
 
 app.use("/users", [authMiddleware.verifyToken], usersRouter);
 app.use("/carts", [authMiddleware.verifyToken], cartsRouter);
+app.use("/notifications", [authMiddleware.verifyToken], notificationsRouter);
 app.use("/orders", [authMiddleware.verifyToken], ordersRouter);
 app.use("/auth", authRouter);
 

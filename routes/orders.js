@@ -75,6 +75,15 @@ async function add(req, res, next) {
           }
         );
 
+        const notificationId = uuidv4();
+        await model.notifications.create({
+          id: notificationId,
+          customer_id,
+          order_id: orderId,
+          message: "Pesanan Anda sudah dibuat, silakan lakukan pembayaran",
+          status: 0,
+        });
+
         res.status(201).json({
           status: "OK",
           messages: "Checkout berhasil",
