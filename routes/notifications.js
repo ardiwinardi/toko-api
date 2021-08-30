@@ -12,6 +12,8 @@ async function getAll(req, res, next) {
       where: {
         customer_id: req.userId,
       },
+      order: [["createdAt", "desc"]],
+      order: [["status", "asc"]],
     });
     res.json({
       status: "OK",
