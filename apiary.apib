@@ -1,12 +1,9 @@
 FORMAT: 1A
-HOST: https://tokoapi.docs.apiary.io/
+HOST: http://localhost:3200
 # Sample REST API - TOKO
 ## Authorization [/auth/signin]
 ### Sign In [POST]
 + Request (application/json)
-    + Headers
-
-            Authorization: token
     + Body
 
             {
@@ -290,4 +287,49 @@ HOST: https://tokoapi.docs.apiary.io/
             {
                 "status": "ERROR",
                 "messages": "Keranjang masih kosong"
+            }
+## Notifications Collection [/notifications]
+### List All [GET]
++ Request
+    + Headers
+    
+            Authorization: token
++ Response 200 (application/json)
+
+        {
+            "status": "OK",
+            "messages": "",
+            "data": [
+                {
+                    "id": "0088eceb-24bc-476a-9343-65dbd58e6eab",
+                    "customer_id": "ba5ae9b2-44b7-404b-8810-9d600ff36d81",
+                    "order_id": "16acc017-f055-40d0-a787-29fc933f82d2",
+                    "message": "Pesanan Anda sudah dibuat, silakan lakukan pembayaran",
+                    "status": 1,
+                    "createdAt": "2021-08-30T16:01:28.000Z",
+                    "updatedAt": "2021-08-30T16:03:14.000Z"
+                },
+                {
+                    "id": "1f761800-0029-43f8-81dc-fa515088f633",
+                    "customer_id": "ba5ae9b2-44b7-404b-8810-9d600ff36d81",
+                    "order_id": "72a65e36-7664-42f6-8ff3-9fd626ea957e",
+                    "message": "Pesanan Anda sudah dibuat, silakan lakukan pembayaran",
+                    "status": 1,
+                    "createdAt": "2021-08-30T15:59:17.000Z",
+                    "updatedAt": "2021-08-30T16:03:16.000Z"
+                },
+            ]
+        }
+## Single Notification [/notifications/:id]
+### Set as Read [PUT]
++ Request
+    + Headers
+
+            Authorization: token
++ Response 201 (application/json)
+    + Body
+
+            {
+                "status": "OK",
+                "messages": "Notifikasi berhasil diupdate"
             }
